@@ -21,7 +21,8 @@
 #include <SD.h>
 #include <SPI.h>
 
-File myFile1;
+const int featureNum = 3;
+File myFile[featureNum];
 
 void setup()
 {
@@ -47,14 +48,14 @@ void setup()
   
   // open the file. note that only one file can be open at a time,
   // so you have to close this one before opening another.
-  myFile1 = SD.open("HS_Humid.txt", FILE_WRITE);
+  myFile[0] = SD.open("HS_Humid.txt", FILE_WRITE);
   
   // if the file opened okay, write to it:
-  if (myFile1) {
+  if (myFile[0]) {
     Serial.print("Writing to HS_Humid.txt...");
-    myFile1.println("Here is the Data for humidity");
+    myFile[0].println("Here is the Data for humidity");
 	// close the file:
-    myFile1.close();
+    myFile[0].close();
     Serial.println("done.");
   } else {
     // if the file didn't open, print an error:
@@ -62,19 +63,49 @@ void setup()
   }
   
   // re-open the file for reading:
-  myFile1 = SD.open("HS_Humid.txt");
-  if (myFile1) {
+  myFile[0] = SD.open("HS_Humid.txt");
+  if (myFile[0]) {
     Serial.println("HS_Humid.txt:");
     
     // read from the file until there's nothing else in it:
-    while (myFile1.available()) {
-    	Serial.write(myFile1.read());
+    while (myFile[0].available()) {
+    	Serial.write(myFile[0].read());
     }
     // close the file:
-    myFile1.close();
+    myFile[0].close();
   } else {
   	// if the file didn't open, print an error:
     Serial.println("error opening HS_Humid.txt");
+  }
+    
+    myFile[1] = SD.open("HS_Temp.txt", FILE_WRITE);
+  
+  // if the file opened okay, write to it:
+  if (myFile[1]) {
+    Serial.print("Writing to HS_Temp.txt...");
+    myFile[1].println("Here is the Data for temperature");
+	// close the file:
+    myFile[1].close();
+    Serial.println("done.");
+  } else {
+    // if the file didn't open, print an error:
+    Serial.println("error opening HS_Temp.txt");
+  }
+  
+  // re-open the file for reading:
+  myFile[1] = SD.open("HS_Temp.txt");
+  if (myFile[1]) {
+    Serial.println("HS_Temp.txt:");
+    
+    // read from the file until there's nothing else in it:
+    while (myFile[1].available()) {
+    	Serial.write(myFile[1].read());
+    }
+    // close the file:
+    myFile[1].close();
+  } else {
+  	// if the file didn't open, print an error:
+    Serial.println("error opening HS_Temp.txt");
   }
 }
 

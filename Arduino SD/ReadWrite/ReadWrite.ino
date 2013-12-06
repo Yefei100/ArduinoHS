@@ -1,7 +1,8 @@
 /*
-  SD card read/write
+ SD card read/write
  
  This example shows how to read and write data to and from an SD card file 	
+ 
  The circuit:
  * SD card attached to SPI bus as follows:
  ** MOSI - pin 11
@@ -9,13 +10,8 @@
  ** CLK - pin 13
  ** CS - pin 4
  
- created   Nov 2010
- by David A. Mellis
- modified 9 Apr 2012
- by Tom Igoe
+ * device : Arduino Uno, Ethernet Shield	
  
- This example code is in the public domain.
- 	 
  */
  
 #include <SD.h>
@@ -111,6 +107,6 @@ void setup()
 
 void loop()
 {
-	// nothing happens after setup
+    //don't need to add anything at this time;
 }
 
